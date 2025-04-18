@@ -16,3 +16,11 @@ pip install numpy pandas # or whatever you need
 
 Step 5: Freeze your environment (later)
 pip freeze > requirements.txt
+
+
+To exit from venv:
+deactivate
+
+#Groqcloud
+https://console.groq.com/docs/models
+Ollama - Docker Container

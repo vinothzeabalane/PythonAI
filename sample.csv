@@ -1,0 +1,44 @@
+﻿Sl.No,ServerName,OS Details,Hardware Type,Date of Patching,InstallationStatus,Schedule Time,Remarks,Patching Cycle,Request No,Portfolio,Application,Environment,Months
+1,SHLLGTPLPAP103,Windows 2019,Virtual,1-May-25,,5:00 AM,,April-25,CHG0103694,Facilities & Business Applications,Lutron Lighting,Test,May-25
+2,SHAUCLTLPAP101,Windows 2019,Virtual,1-May-25,,9:00 AM,,April-25,CHG0103551,Ambulatory,Cochlear Link,Test,May-25
+3,SHSDHLDFCAP101,Windows 2012 R2,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,Domino,Test,May-25
+4,SHSDHLTLPAP101,Windows 2019,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,Domino,Test,May-25
+5,SHEXLATLPAP101,Windows 2019,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,Extract LabDE,Test,May-25
+6,SHEXLATLPDQ101,Windows 2019,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,Extract LabDE,Test,May-25
+7,SHFLUETRNAP102,Windows 2019,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,Fluency Now,Test,May-25
+8,SHFLUETRNDQ101,Windows 2019,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,Fluency Now,Test,May-25
+9,SHFLUETEMAP101,Windows 2008 R2,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,Fluency Server Tools,Test,May-25
+10,SHFLUETRNAP101,Windows 2019,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,Fluency Server Tools,Test,May-25
+11,SHFILETLPDQ101,Windows 2022,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,FileMaker Pro (Ambulatory),Test,May-25
+12,SHAUCLTLPDQ101,Windows 2019,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,MedE! Maestro,Test,May-25
+13,SHAUCLTSCAP102,Windows 2016,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,MedE! Maestro,Test,May-25
+14,SHAUCLTSCDQ102,Windows 2012 R2,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,MedE! Maestro,Test,May-25
+15,SHAUCLTSCDQ103,Windows 2016,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,MedE! Maestro,Test,May-25
+16,SHAUCLT5PAP101,Windows 2019,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,NOAH,Test,May-25
+17,SHNOAHT5PDQ101,Windows 2019,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,NOAH,Test,May-25
+18,SHKNOWTEMWB103,Windows 2016,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,Universal Knowledge System (Repl. Book of Business),Test,May-25
+19,SHKNOWTEMWB104,Windows 2016,Virtual,1-May-25,,,,April-25,CHG0103551,Ambulatory,Universal Knowledge System (Repl. Book of Business),Test,May-25
+20,SHXIBET5PWB101,Windows 2016,Virtual,1-May-25,,11:30 AM,,March-25,CHG0103355,Ancillary,Xper IM,Test,May-25
+21,SHXPIMT5PDQ101,Windows 2016,Virtual,1-May-25,,,,March-25,CHG0103355,Ancillary,Xper IM,Test,May-25
+22,SHXPERTLPDQ101,Windows 2019,Virtual,1-May-25,,,,March-25,CHG0103355,Ancillary,Xper IM,Test,May-25
+23,SHXPERTLPWB101,Windows 2019,Virtual,1-May-25,,,,March-25,CHG0103355,Ancillary,Xper IM,Test,May-25
+24,SHCEDRTRNAP101,Windows 2019,Virtual,1-May-25,,,,April-25,CHG0103355,Ancillary,Cedaron,Test,May-25
+25,SHTALSTLPAP101,Windows 2019,Virtual,2-May-25,,12:00 AM,,April-25,CHG0103499,Clinical Technology,Talis-Hub,Test,May-25
+26,SHAMAMT5PAP101,Windows 2019,Virtual,2-May-25,,12:00 AM,,April-25,CHG0103434,Support Services,File Access Manager (FAM),Test,May-25
+27,SHAMAWT5PWB101,Windows 2019,Virtual,2-May-25,,Don’t Install Net Framework Patches - FAM Servers,,April-25,CHG0103434,Support Services,File Access Manager (FAM),Test,May-25
+28,SHAMCCT5PAP101,Windows 2019,Virtual,2-May-25,,,,April-25,CHG0103434,Support Services,File Access Manager (FAM),Test,May-25
+29,SHAMDCT5PAP101,#N/A,Virtual,2-May-25,,,,April-25,CHG0103434,Support Services,File Access Manager (FAM),Test,May-25
+30,SHAMESD5PAP101,Windows 2019,Virtual,2-May-25,,,,April-25,CHG0103434,Support Services,File Access Manager (FAM),Test,May-25
+31,SHAMESD5PAP102,Windows 2019,Virtual,2-May-25,,,,April-25,CHG0103434,Support Services,File Access Manager (FAM),Test,May-25
+32,SHAMEMT5PAP101,Windows 2019,Virtual,2-May-25,,,,April-25,CHG0103434,Support Services,File Access Manager (FAM),Test,May-25
+33,SHAMEST5PAP101,Windows 2019,Virtual,2-May-25,,,,April-25,CHG0103434,Support Services,File Access Manager (FAM),Test,May-25
+34,SHAMPCT5PAP101,Windows 2019,Virtual,2-May-25,,,,April-25,CHG0103434,Support Services,File Access Manager (FAM),Test,May-25
+35,SHAMSPTLPAP101,Windows 2019,Virtual,2-May-25,,,,April-25,CHG0103434,Support Services,File Access Manager (FAM),Test,May-25
+36,SHAMSPTLPAP102,Windows 2019,Virtual,2-May-25,,,,April-25,CHG0103434,Support Services,File Access Manager (FAM),Test,May-25
+37,SHAMSPTLPAP103,Windows 2019,Virtual,2-May-25,,,,April-25,CHG0103434,Support Services,File Access Manager (FAM),Test,May-25
+38,SHAMSPTLPAP104,Windows 2019,Virtual,2-May-25,,,,April-25,CHG0103434,Support Services,File Access Manager (FAM),Test,May-25
+39,SHAMSQT5PDQ101,Windows 2019,Virtual,2-May-25,,,,April-25,CHG0103434,Support Services,File Access Manager (FAM),Test,May-25
+40,SHRBACDRNAP101,Windows 2019,Virtual,2-May-25,,TASK1588836,,April-25,CHG0103434,Support Services,RBAC,Test,May-25
+41,SHRBACDRNAP102,Windows 2019,Virtual,2-May-25,,TASK1588848,,April-25,CHG0103434,Support Services,RBAC,Test,May-25
+42,SHRBACDLPAP101,Windows 2019,Virtual,2-May-25,,Need to update the Vulnerabities - TASK1588834,,April-25,CHG0103434,Support Services,RBAC,Test,May-25
+43,SHRBACDRNAP103,Windows 2019,Virtual,2-May-25,,TASK1588956,,April-25,CHG0103434,Support Services,RBAC,Test,May-25
