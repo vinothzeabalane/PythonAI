@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import requests
 import time
+from datetime import timedelta
 
 app = Flask(__name__)
 
@@ -58,18 +59,27 @@ Now, based on the data above, answer the following question:
                 file_content = file.read().decode('utf-8')
                 prompt = f"{file_content}\n\n{question}"
         except Exception as e:
-            return jsonify({'answer': f"Failed to read file: {str(e)}", 'time': 0})
+            return jsonify({'answer': f"Failed to read file: {str(e)}", 'time': "0:00:000000"})
     else:
         prompt = question
 
     if not prompt.strip():
-        return jsonify({'answer': "No question or file uploaded.", 'time': 0})
+        return jsonify({'answer': "No question or file uploaded.", 'time': "0:00:000000"})
 
     answer = get_ai_answer(prompt)
+    
     end_time = time.time()
-    duration = round(end_time - start_time, 2)
-
-    return jsonify({'answer': answer, 'time': duration})
+    duration_seconds = end_time - start_time
+    duration = timedelta(seconds=duration_seconds)
+    
+    # Formatting duration into min:sec:microsec
+    minutes = duration.seconds // 60
+    seconds = duration.seconds % 60
+    microseconds = duration.microseconds
+    
+    formatted_duration = f"{minutes}:{seconds:02}:{microseconds:06}"
+    
+    return jsonify({'answer': answer, 'time': formatted_duration})
 
 if __name__ == '__main__':
     app.run(debug=True)

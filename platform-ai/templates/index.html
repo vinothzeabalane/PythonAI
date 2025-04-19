@@ -99,7 +99,7 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById('answer').innerText =
-                    `Answer (took ${data.time} sec):\n\n${data.answer}`;
+                    `Answer (took ${data.time} min:sec:ms):\n\n${data.answer}`;
             })
             .catch(error => {
                 document.getElementById('answer').innerText = 'Error: ' + error;

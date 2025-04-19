@@ -4,6 +4,7 @@ import pandas as pd
 from dotenv import load_dotenv
 from groq import Groq
 import time
+from datetime import timedelta
 
 # Load environment variables from .env file
 load_dotenv()
@@ -19,7 +20,7 @@ def allowed_file(filename):
 def get_ai_answer(prompt):
     try:
         response = client.chat.completions.create(
-            model="llama3-70b-8192",
+            model="llama3-70b-8192",  # Change to your required model
             messages=[{"role": "user", "content": prompt}]
         )
         return response.choices[0].message.content
@@ -32,6 +33,8 @@ def index():
 
 @app.route('/ask', methods=['POST'])
 def ask():
+    start_time = time.time()  # Start measuring time
+
     question = request.form.get('question')
     file = request.files.get('file')
     prompt = ""
@@ -52,21 +55,30 @@ Now, based on the data above, answer the following question:
                 file_content = file.read().decode('utf-8')
                 prompt = f"{file_content}\n\n{question}"
         except Exception as e:
-            return jsonify({'answer': f"Failed to read file: {str(e)}", 'time': 0})
+            return jsonify({'answer': f"Failed to read file: {str(e)}", 'time': "0:00:000"})
     else:
         prompt = question
 
     if not prompt.strip():
-        return jsonify({'answer': "No question or file uploaded.", 'time': 0})
+        return jsonify({'answer': "No question or file uploaded.", 'time': "0:00:000"})
 
-    # Measure response time
-    start_time = time.time()
+    # Get the AI answer
     answer = get_ai_answer(prompt)
-    end_time = time.time()
-    duration = round(end_time - start_time, 2)
 
-    return jsonify({'answer': answer, 'time': duration})
+    # End measuring time
+    end_time = time.time()
+    duration_seconds = end_time - start_time
+    duration = timedelta(seconds=duration_seconds)
+
+    # Extract minutes, seconds, and milliseconds
+    minutes = duration.seconds // 60
+    seconds = duration.seconds % 60
+    milliseconds = duration.microseconds // 1000  # Convert microseconds to milliseconds
+
+    # Format time as min:sec:ms
+    formatted_duration = f"{minutes}:{seconds:02}:{milliseconds:03}"
+
+    return jsonify({'answer': answer, 'time': formatted_duration})
 
 if __name__ == '__main__':
     app.run(debug=True, port=5050)
-
