@@ -1,9 +1,14 @@
 from flask import Flask, render_template, request, jsonify
 import os
 import pandas as pd
-import requests
+from dotenv import load_dotenv
+from groq import Groq
+
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__)
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
 ALLOWED_EXTENSIONS = {'txt', 'csv'}
 
@@ -12,20 +17,13 @@ def allowed_file(filename):
 
 def get_ai_answer(prompt):
     try:
-        url = "http://localhost:11434/api/generate"
-        payload = {
-            "model": "llama3.2:3b",  # or your preferred local model
-            "prompt": prompt,
-            "stream": False
-        }
-        headers = {
-            "Content-Type": "application/json"
-        }
-        response = requests.post(url, json=payload, headers=headers)
-        result = response.json()
-        return result.get("response", "No response from AI.")
+        response = client.chat.completions.create(
+            model="llama3-70b-8192",
+            messages=[{"role": "user", "content": prompt}]
+        )
+        return response.choices[0].message.content
     except Exception as e:
-        return f"Error contacting Ollama: {str(e)}"
+        return f"Error contacting AI model: {str(e)}"
 
 @app.route('/')
 def index():
@@ -42,7 +40,7 @@ def ask():
         if filename.endswith('.csv'):
             try:
                 df = pd.read_csv(file)
-                data_snippet = df.head(200).to_string(index=False)
+                data_snippet = df.head(100).to_string(index=False)
                 prompt = f"""Here is a sample dataset from the uploaded CSV file:
 
 {data_snippet}

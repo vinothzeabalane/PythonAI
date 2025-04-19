@@ -41,7 +41,7 @@
             margin-top: 0;
         }
         #logo {
-            height: 60px;  /* Adjust size as needed */
+            height: 60px;
             margin-right: 20px;
         }
         header {
@@ -53,7 +53,7 @@
 </head>
 <body>
     <header>
-        <img src="{{ url_for('static', filename='PS.jpg') }}" id="logo" alt="Logo">  <!-- Flask logo -->
+        <img src="{{ url_for('static', filename='PS.jpg') }}" id="logo" alt="Logo">
         <h2>PS Runbot</h2>
     </header>
     <div class="container">
@@ -62,8 +62,7 @@
             <h3>Ask AI</h3>
             <textarea id="question" placeholder="Type your question here..."></textarea><br>
 
-            <!-- File Upload -->
-            <input type="file" id="fileUpload" /><br><br>
+            <input type="file" id="fileUpload" accept=".txt,.csv" /><br><br>
 
             <button onclick="submitQuestion()">Submit</button>
             <button onclick="clearFields()">Clear</button>
@@ -80,21 +79,19 @@
         function submitQuestion() {
             const question = document.getElementById('question').value;
             const fileInput = document.getElementById('fileUpload');
-            const file = fileInput.files[0];  // Get the uploaded file
+            const file = fileInput.files[0];
 
             if (!question.trim() && !file) {
                 alert("Please enter a question or upload a file.");
                 return;
             }
 
-            // Show a "Thinking..." message while waiting for the response
             document.getElementById('answer').innerText = 'Thinking...';
 
             let formData = new FormData();
             formData.append('question', question);
-
             if (file) {
-                formData.append('file', file);  // Append the file to FormData
+                formData.append('file', file);
             }
 
             fetch('/ask', {
@@ -112,7 +109,7 @@
 
         function clearFields() {
             document.getElementById('question').value = '';
-            document.getElementById('fileUpload').value = '';  // Clear the file input
+            document.getElementById('fileUpload').value = '';
             document.getElementById('answer').innerText = 'Waiting for your question...';
         }
     </script>
