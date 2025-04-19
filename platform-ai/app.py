@@ -1,43 +1,61 @@
 from flask import Flask, render_template, request, jsonify
-import requests
-import json
 import os
+import json
+import pandas as pd
 from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
+from groq import Groq
 
+# Load environment variables from .env
+load_dotenv()
+
+# Initialize Flask and Groq
 app = Flask(__name__)
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
-# Configure upload folder and allowed file extensions
+# Upload config
 app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['ALLOWED_EXTENSIONS'] = {'txt', 'pdf'}
+app.config['ALLOWED_EXTENSIONS'] = {'txt', 'csv'}
 
-# Make sure the upload folder exists
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
-def get_ai_answer(question):
-    url = "http://localhost:11434/api/generate"
-    payload = {
-        "model": "deepseek-r1:1.5b",  # Change if you're using a different local model
-        "prompt": question,
-        "stream": False
-    }
-    headers = {
-        "Content-Type": "application/json"
-    }
-
+# AI response from prompt
+def get_ai_answer(prompt):
     try:
-        response = requests.post(url, headers=headers, data=json.dumps(payload))
-        result = response.json()
-        return result.get("response", "No response from AI.")
+        response = client.chat.completions.create(
+            model="llama3-70b-8192",
+            messages=[
+                {"role": "user", "content": prompt}
+            ]
+        )
+        return response.choices[0].message.content
     except Exception as e:
         return f"Error contacting AI model: {str(e)}"
 
+# CSV processing
+def extract_text_from_csv(file_path, user_question):
+    try:
+        df = pd.read_csv(file_path)
+        data_snippet = df.head(100).to_string(index=False)
+        prompt = f"""
+Here is a sample dataset from the uploaded CSV file:
+
+{data_snippet}
+
+Now, based on the data above, answer the following question:
+{user_question}
+"""
+        return prompt
+    except Exception as e:
+        return f"Failed to process CSV: {str(e)}"
+
+# TXT fallback
 def extract_text_from_file(file_path):
-    """Extract text from the file. This is a simplified function for .txt files."""
-    with open(file_path, 'r') as file:
+    with open(file_path, 'r', encoding='utf-8') as file:
         return file.read()
 
 @app.route('/')
@@ -54,16 +72,20 @@ def ask():
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(file_path)
 
-        # Process the file, here it's assumed to be a .txt file for simplicity
-        if filename.endswith('.txt'):
-            file_text = extract_text_from_file(file_path)
-            question = file_text  # You can process the file contents further if needed
+        if filename.endswith('.csv'):
+            prompt = extract_text_from_csv(file_path, question)
+        elif filename.endswith('.txt'):
+            file_content = extract_text_from_file(file_path)
+            prompt = f"{file_content}\n\n{question}"
+        else:
+            prompt = question
+    else:
+        prompt = question
 
-    if not question:
+    if not prompt:
         return jsonify({'answer': "No question or file uploaded."})
 
-    # Get AI answer using the question or file contents
-    answer = get_ai_answer(question)
+    answer = get_ai_answer(prompt)
     return jsonify({'answer': answer})
 
 if __name__ == '__main__':
