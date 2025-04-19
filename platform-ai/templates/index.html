@@ -61,9 +61,7 @@
         <div class="column">
             <h3>Ask AI</h3>
             <textarea id="question" placeholder="Type your question here..."></textarea><br>
-
             <input type="file" id="fileUpload" accept=".txt,.csv" /><br><br>
-
             <button onclick="submitQuestion()">Submit</button>
             <button onclick="clearFields()">Clear</button>
         </div>
@@ -100,7 +98,8 @@
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('answer').innerText = data.answer;
+                document.getElementById('answer').innerText =
+                    `Answer (took ${data.time} sec):\n\n${data.answer}`;
             })
             .catch(error => {
                 document.getElementById('answer').innerText = 'Error: ' + error;

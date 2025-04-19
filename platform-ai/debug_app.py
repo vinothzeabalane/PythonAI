@@ -3,8 +3,9 @@ import os
 import pandas as pd
 from dotenv import load_dotenv
 from groq import Groq
+import time
 
-# Load environment variables
+# Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
@@ -37,8 +38,8 @@ def ask():
 
     if file and allowed_file(file.filename):
         filename = file.filename.lower()
-        if filename.endswith('.csv'):
-            try:
+        try:
+            if filename.endswith('.csv'):
                 df = pd.read_csv(file)
                 data_snippet = df.head(100).to_string(index=False)
                 prompt = f"""Here is a sample dataset from the uploaded CSV file:
@@ -47,24 +48,25 @@ def ask():
 
 Now, based on the data above, answer the following question:
 {question}"""
-            except Exception as e:
-                return jsonify({'answer': f"Failed to read CSV: {str(e)}"})
-        elif filename.endswith('.txt'):
-            try:
+            elif filename.endswith('.txt'):
                 file_content = file.read().decode('utf-8')
                 prompt = f"{file_content}\n\n{question}"
-            except Exception as e:
-                return jsonify({'answer': f"Failed to read TXT: {str(e)}"})
-        else:
-            prompt = question
+        except Exception as e:
+            return jsonify({'answer': f"Failed to read file: {str(e)}", 'time': 0})
     else:
         prompt = question
 
-    if not prompt:
-        return jsonify({'answer': "No question or file uploaded."})
+    if not prompt.strip():
+        return jsonify({'answer': "No question or file uploaded.", 'time': 0})
 
+    # Measure response time
+    start_time = time.time()
     answer = get_ai_answer(prompt)
-    return jsonify({'answer': answer})
+    end_time = time.time()
+    duration = round(end_time - start_time, 2)
+
+    return jsonify({'answer': answer, 'time': duration})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5050)
+
