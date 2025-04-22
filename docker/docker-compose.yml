@@ -19,6 +19,7 @@ services:
       - N8N_BASIC_AUTH_PASSWORD=admin123
       - GENERIC_TIMEZONE=America/
       - N8N_SECURE_COOKIE=false
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
       - TZ=America/Vancouver
       # Optional webhook tunnel for public URLs (e.g., ngrok or domain)
       # - WEBHOOK_TUNNEL_URL=https://yourdomain.com

@@ -1,1 +1,8 @@
 http://10.74.135.32:5678
+
+http://10.74.134.8:5678/home/workflows
+
+remlab@vc-ps-server-1:~/ps-bpt/PythonAI/docker$ sudo chown -R 1000:1000 ./n8n_data
+sudo chown -R 1000:1000 ./n8n_data
+
+docker-compose -p docker_n8n -f '/home/remlab/ps-bpt/PythonAI/docker/docker-compose.yml' up -d 
