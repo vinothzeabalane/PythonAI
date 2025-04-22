@@ -37,3 +37,5 @@ coverage.xml
 .mypy_cache/
 .pyre/
 .pytype/
+
+server_info.md
