@@ -82,4 +82,5 @@ Now, based on the data above, answer the following question:
     return jsonify({'answer': answer, 'time': formatted_duration})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=6070)
+    app.run(host='0.0.0.0', port=5000, debug=True)
+
