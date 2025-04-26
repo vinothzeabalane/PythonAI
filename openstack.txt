@@ -1,0 +1,14 @@
+# To create a virtual machine on linux
+
+wget https://releases.ubuntu.com/22.04/ubuntu-22.04.2-live-server-amd64.iso
+
+sudo virt-install \
+  --name node1 \
+  --ram 2048 \
+  --vcpus 2 \
+  --disk path=/var/lib/libvirt/images/node1.qcow2,size=10 \
+  --cdrom /home/remlab/ubuntu-20.04.6-desktop-amd64.iso \
+  --network network=default \
+  --os-type linux \
+  --os-variant ubuntu20.04
+
